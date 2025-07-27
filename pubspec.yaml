@@ -1,0 +1,15 @@
+name: foundation
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  equatable: ^2.0.7
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.6.1
+
+dev_dependencies:
+  very_good_analysis: ^7.0.0
