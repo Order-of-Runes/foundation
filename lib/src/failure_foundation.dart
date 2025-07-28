@@ -1,8 +1,10 @@
 // Copyright (c) 2025 Order of Runes Authors. All rights reserved.
 
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
-abstract class FailureFoundation<C, S> extends Equatable implements Exception {
+abstract class FailureFoundation extends Equatable implements Exception {
   const FailureFoundation(
     this.message, {
     this.detail,
@@ -14,6 +16,30 @@ abstract class FailureFoundation<C, S> extends Equatable implements Exception {
   final String message;
   final String? detail;
   final StackTrace? stackTrace;
-  final C? code;
-  final S? source;
+  final BaseCode? code;
+  final BaseSource? source;
+
+  @override
+  String toString() {
+    final map = {
+      'source': source?.name,
+      'code': code?.value.toString(),
+      'message': message,
+      if (detail != null) 'detail': detail,
+      if (stackTrace != null) 'stack_trace': stackTrace,
+      ...toStringValues,
+    };
+
+    return const JsonEncoder.withIndent(' ').convert(map);
+  }
+
+  Map<String, String> get toStringValues;
+}
+
+abstract interface class BaseCode {
+  double get value;
+}
+
+abstract interface class BaseSource {
+  String get name;
 }
