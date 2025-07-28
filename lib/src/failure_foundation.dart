@@ -20,6 +20,16 @@ abstract class FailureFoundation extends Equatable implements Exception {
   final BaseSource? source;
 
   @override
+  List<Object?> get props => [
+    message,
+    detail,
+    stackTrace,
+    code,
+    source,
+    ...additionalProps,
+  ];
+
+  @override
   String toString() {
     final map = {
       'source': source?.name,
@@ -34,6 +44,8 @@ abstract class FailureFoundation extends Equatable implements Exception {
   }
 
   Map<String, String> get toStringValues;
+
+  List<Object?> get additionalProps;
 }
 
 abstract interface class BaseCode {
