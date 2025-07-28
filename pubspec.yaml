@@ -1,5 +1,5 @@
 name: foundation
-description: A starting point for Dart libraries or applications.
+description: "An opinionated foundation package"
 version: 0.0.4
 
 environment:
