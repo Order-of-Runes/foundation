@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-abstract class FailureFoundation extends Equatable implements Exception {
+class FailureFoundation extends Equatable implements Exception {
   const FailureFoundation(
     this.message, {
     this.detail,
@@ -16,8 +16,8 @@ abstract class FailureFoundation extends Equatable implements Exception {
   final String message;
   final String? detail;
   final StackTrace? stackTrace;
-  final BaseCode? code;
-  final BaseSource? source;
+  final double? code;
+  final String? source;
 
   @override
   List<Object?> get props => [
@@ -26,32 +26,24 @@ abstract class FailureFoundation extends Equatable implements Exception {
     stackTrace,
     code,
     source,
-    ...additionalProps,
+    if (additionalProps != null) ...additionalProps!,
   ];
 
   @override
   String toString() {
     final map = {
-      'source': source?.name,
-      'code': code?.value.toString(),
+      'source': source,
+      'code': code,
       'message': message,
       if (detail != null) 'detail': detail,
       if (stackTrace != null) 'stack_trace': stackTrace,
-      ...toStringValues,
+      if (toStringValues != null) ...toStringValues!,
     };
 
     return const JsonEncoder.withIndent(' ').convert(map);
   }
 
-  Map<String, String> get toStringValues;
+  Map<String, String>? get toStringValues => null;
 
-  List<Object?> get additionalProps;
-}
-
-abstract interface class BaseCode {
-  double get value;
-}
-
-abstract interface class BaseSource {
-  String get name;
+  List<Object?>? get additionalProps => null;
 }
