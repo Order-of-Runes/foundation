@@ -1,6 +1,6 @@
 name: foundation
 description: "An opinionated foundation package"
-version: 0.0.10
+version: 0.0.11
 
 environment:
   sdk: ">=3.8.0 <4.0.0"
